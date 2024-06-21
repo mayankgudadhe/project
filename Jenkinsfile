@@ -11,15 +11,13 @@ pipeline {
 	stages {
 		stage ("Maven") {
 			steps {
-				dir ("/mnt/test/project"){
 				sh 'rm -rf /root/.m2/repository'
 				sh 'mvn clean package'
-				}
 			}
 		}
 		stage ("Copy_war") {
 			steps {
-				sh "scp -r use.pem project/target/LoginWebApp.war ec2-user@ec2-13-234-59-134.ap-south-1.compute.amazonaws.com://root/server/apache-tomcat-9.0.90/webapps"
+				sh "scp -r use.pem target/LoginWebApp.war ec2-user@ec2-13-234-59-134.ap-south-1.compute.amazonaws.com://root/server/apache-tomcat-9.0.90/webapps"
 			}
 		}
 	}}
